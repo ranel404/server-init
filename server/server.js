@@ -9,9 +9,15 @@ const express = require('express')
 const app = express()
 
 
+
+// STATIC MIDDLEWARE 
+/*Para el servicio de archivos estáticos, como imágenes, archivos CSS y de JavaScript, utilice la
+función de Middleware incorporado Express.static de Express. */
+
+app.use('/static', express.static(__dirname + '/public'));
+
+
 //MANEJADORES DE RUTA
-
-
 
 // Una función de devolución de llamada individual puede manejar una ruta.
 app.get('/', (req, res) => {
