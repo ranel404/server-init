@@ -1,23 +1,16 @@
-<div class="posts">
-    <div class="row justify-content-center">
-        <div class="col-lg-7" style="margin-top: 50px;">
-            <div class="card">
-                <img src="{{post.image}}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Posted by {{post.author}}</h5>
-                    {{#if post.comments}}
-                    <ul class="list-group">
-                        {{#each post.comments}}
-                        <li class="list-group-item">{{this}}</li>
-                        {{/each}}
-                    </ul>
-                    {{else}}
-                    <ul class="list-group">
-                        <li class="list-group-item">Be first to comment on this post</li>
-                    </ul>
-                    {{/if}}
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    {{>header}}
+    {{>posts posts=posts}}
+</body>
+
+</html>

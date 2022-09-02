@@ -27,19 +27,27 @@ app.use('/static', express.static(__dirname + '/views'));
 //MANEJADORES DE RUTA
 // Manejador de ruta de handlebars render
 
-app.get("/asd", (req, res) => {
-    res.render('home',{
-        post: {
-            author: 'Chapo Gusman',
-            image: 'https://picsum.photo/500/500',
-            comments:  [
-                'This is the first comment',
-                'This is the second comment',
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec fermen'
+app.get("/", function (req, res) {
+    res.render('home', {
+        posts: [
+            {
+                author: 'Janith Kasun',
+                image: 'https://picsum.photos/500/500',
+                comments: [
+                    'This is the first comment',
+                    'This is the second comment',
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec fermentum ligula. Sed vitae erat lectus.'
                 ]
-        }
+            },
+            {
+                author: 'John Doe',
+                image: 'https://picsum.photos/500/500?2',
+                comments: [
+                ]
+            }
+        ]
     });
-   });
+});
 
 
 
