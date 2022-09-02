@@ -1,66 +1,47 @@
-//requerimos rutas
-const route1 = require('./routes/route-1');
 
-//requerimos el modulo de express
+//requerimos de modulos express
 const express = require('express')
+const exphbs = require('express-handlebars')
 
 // Creamos un objeto de módulo 
 /* Instancia del modulo express */
 const app = express()
 
+// CONFIGURACION EXPRESS HANDLEBARS
+
+app.engine('hbs', exphbs.engine({
+    defaultLayout: 'main',
+    extname: '.hbs'
+}));
+app.set('views', __dirname + '/views');
+app.set('view engine', 'hbs');
 
 
 // STATIC MIDDLEWARE 
 /*Para el servicio de archivos estáticos, como imágenes, archivos CSS y de JavaScript, utilice la
 función de Middleware incorporado Express.static de Express. */
 
-app.use('/static', express.static(__dirname + '/public'));
+app.use('/static', express.static(__dirname + '/views'));
 
 
 //MANEJADORES DE RUTA
+// Manejador de ruta de handlebars render
 
-// Una función de devolución de llamada individual puede manejar una ruta.
-app.get('/', (req, res) => {
-
-    //enviar respuesta
-    res.send('Message send from server whit Method GET')
-})
-
-// Más de una función de devolución de llamada puede manejar una ruta
-// (asegúrese de especificar el objeto next). 
-app.get('/example/b', (req, res, next) => {
-    console.log('the response will be sent by the next function')
-    next()
-}, () => {
-    res.send('Hello from B!')
-})
-
-// Una matriz de funciones de devolución de llamada puede manejar una ruta.
-const cb0 = (req, res, next) => {
-    console.log('CB0');
-    next();
-}
-const cb1 = (req, res, next) => {
-    console.log('CB1');
-    next();
-}
-const cb2 = (req, res) => {
-    res.send('Hello from C!');
-}
-app.get('/example/c', [cb0, cb1, cb2]);
-
-//RUTAS
-
-app.use('/route1', route1);
+app.get("/asd", (req, res) => {
+    res.render('home',{
+        post: {
+            author: 'Chapo Gusman',
+            image: 'https://picsum.photo/500/500',
+            comments:  [
+                'This is the first comment',
+                'This is the second comment',
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec fermen'
+                ]
+        }
+    });
+   });
 
 
-/*Hay un método de direccionamiento especial, app.all(), que no se deriva de ningún método HTTP. 
-La usamos para cargar funciones de Middleware en una vía de acceso para todos los métodos de solicitud*/
-
-app.all('/Secret', (res, req) => {
-
-    console.log('Accessing the secret section')
-})
 
 // DEFINIMOS RUTA DE ERROR
 
