@@ -24,7 +24,9 @@ app.use('/static', express.static(__dirname + '/views'));
 
 // MANEJADOR DE RUTAS: PUG
 app.get('/', (req, res) => {
+    res.setHeader("Content-Type", "text/html")
     res.render('index');
+    
    });
 
 
