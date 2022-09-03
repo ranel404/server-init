@@ -26,8 +26,15 @@ app.use('/static', express.static(__dirname + '/views'));
 app.get('/', (req, res) => {
     res.setHeader("Content-Type", "text/html")
     res.render('index');
-    
-   });
+
+});
+app.get('/member/:name/planet/:home', (req, res) => {
+    const memberDetails = {
+        member: req.params.name,
+        planet: req.params.home
+    }
+    res.render('guardian', memberDetails);
+});
 
 
 
