@@ -1,20 +1,17 @@
 
 //requerimos de modulos express
 const express = require('express')
-const exphbs = require('express-handlebars')
+
 
 // Creamos un objeto de módulo 
 /* Instancia del modulo express */
 const app = express()
 
-// CONFIGURACION EXPRESS HANDLEBARS
+// CONFIGURACION MOTOR DE PLANTILLAS: PUG
 
-app.engine('hbs', exphbs.engine({
-    defaultLayout: 'main',
-    extname: '.hbs'
-}));
+
 app.set('views', __dirname + '/views');
-app.set('view engine', 'hbs');
+app.set('view engine', 'pug');
 
 
 // STATIC MIDDLEWARE 
@@ -24,35 +21,15 @@ función de Middleware incorporado Express.static de Express. */
 app.use('/static', express.static(__dirname + '/views'));
 
 
-//MANEJADORES DE RUTA
-// Manejador de ruta de handlebars render
 
-app.get("/", function (req, res) {
-    res.render('home', {
-        posts: [
-            {
-                author: 'Janith Kasun',
-                image: 'https://picsum.photos/500/500',
-                comments: [
-                    'This is the first comment',
-                    'This is the second comment',
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec fermentum ligula. Sed vitae erat lectus.'
-                ]
-            },
-            {
-                author: 'John Doe',
-                image: 'https://picsum.photos/500/500?2',
-                comments: [
-                ]
-            }
-        ]
-    });
-});
+// MANEJADOR DE RUTAS: PUG
+app.get('/', (req, res) => {
+    res.render('index');
+   });
 
 
 
 // DEFINIMOS RUTA DE ERROR
-
 
 /*Ya que Express muestra el mensaje de erro cuando no se encuentra ninguna coincidencia
 para un URI dado en la tabla de enrutamiento, esto significa que definimos una ruta para
